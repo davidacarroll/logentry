@@ -25,15 +25,20 @@ def get_timestamp():
     timestamp += str(now.second)
     return(timestamp)
 
-def main():
-    ddb = boto3.resource('dynamodb')
+def lambda_handler(event, context):
     timestamp = get_timestamp()
+    #ddb = boto3.resource('dynamodb')
     #table = ddb.Table('logbook')
     #print(table.scan())
-    """
+
     ############# THE WORKING WAY
     base_url = "https://xysjr7sxo1.execute-api.us-east-1.amazonaws.com/Prod"
-    r = requests.post(f"{base_url}/log-entries", data={'logbookTimestamp': timestamp, 'Name': "Fred"})   
+    r = requests.post(f"{base_url}/log-entries", data={'logbookTimestamp': timestamp, 'Name': "Freddy"})
+    print("Made it to SMSTextToLogbook Lambda Handler!")
+    return{
+        'statusCode': 200,
+        'body': json.dumps("SMSTextToLogbook Posted to DDB logbook table")
+    }
     """
 
     ############# THE NOT WORKING WAY
@@ -49,5 +54,4 @@ def main():
                      headers={'Content-Type': 'application/json'}
                      )
     print("Results are:", r.data)
-
-if __name__ == '__main__': main()
+    """

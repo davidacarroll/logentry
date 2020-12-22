@@ -1,0 +1,6 @@
+To load files from here to AWS:
+Add all files desired to zip.lst
+On RPi console:
+# zip output.zip zip.lst
+# aws
+# aws lambda update-function-code --function-name SMSTextToLogbook --zip-file fileb://..../output.zip
