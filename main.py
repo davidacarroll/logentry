@@ -31,7 +31,7 @@ def main():
     #table = ddb.Table('logbook')
     #print(table.scan())
     """
-    ############ THE WORKING WAY
+    ############# THE WORKING WAY
     base_url = "https://xysjr7sxo1.execute-api.us-east-1.amazonaws.com/Prod"
     r = requests.post(f"{base_url}/log-entries", data={'logbookTimestamp': timestamp, 'Name': "Fred"})   
     """
