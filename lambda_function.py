@@ -31,7 +31,6 @@ def lambda_handler(event, context):
     #table = ddb.Table('logbook')
     #print(table.scan())
 
-    ############# THE WORKING WAY
     base_url = "https://xysjr7sxo1.execute-api.us-east-1.amazonaws.com/Prod"
     r = requests.post(f"{base_url}/log-entries", data={'logbookTimestamp': timestamp, 'Name': "Freddy"})
     print("Made it to SMSTextToLogbook Lambda Handler!")
@@ -39,19 +38,3 @@ def lambda_handler(event, context):
         'statusCode': 200,
         'body': json.dumps("SMSTextToLogbook Posted to DDB logbook table")
     }
-    """
-
-    ############# THE NOT WORKING WAY
-    http = urllib3.PoolManager()
-    fields = {'logbookTimestamp': timestamp, 'Name': "Fred"}
-    encoded_fields = json.dumps(fields)
-    other_encoded_fields = urlencode(fields)
-    link = "https://xysjr7sxo1.execute-api.us-east-1.amazonaws.com/Prod/log-entries"
-    link2 = link + other_encoded_fields
-    r = http.request('POST',
-                     link,
-                     body=encoded_fields,
-                     headers={'Content-Type': 'application/json'}
-                     )
-    print("Results are:", r.data)
-    """
